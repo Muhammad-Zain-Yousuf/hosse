@@ -1,0 +1,34 @@
+[
+  {
+    "id": "course_resource",
+    "title": "Academic Resources",
+    "desc": "Here you can find all the resources of a particular course. Resources can be videos, blogs, books, etc.",
+    "picture": "Cards/resources.jpg",
+    "url": "/"
+  },
+
+  {
+    "id": "events",
+    "title": "Events",
+    "desc": "It contains all the co-curricular events taking place in Pakistan. Sign up for an event you're interested in and make us proud!",
+    "picture": "Cards/Sports.png",
+    "url": "/"
+  },
+
+  {
+    "id": "instructors",
+    "title": "Instructors",
+    "desc": "List of all instructors and departments at Habib University.",
+    "picture": "Cards/instructors.jpg",
+    "url": "https://habib.edu.pk/academics/"
+  },
+
+  {
+    "id": "suggestion",
+    "title": "Suggest a Resource!",
+    "desc": " Help your fellow Habibians too! If you find a resource for a particular course that you think is relevant and important, please suggest the resource to the admin so that we can include it.",
+    "picture": "Cards/suggestion.jpg",
+    "url": "/"
+  }
+  
+]

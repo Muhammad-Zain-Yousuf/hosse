@@ -1,0 +1,20 @@
+.home-back {
+    background-image: url("../../Assets/Home/cover2.jpeg");
+    background-size: cover;
+    padding-bottom: 150px;
+    padding-top: 150px;
+    
+}
+
+.home-back h1, h4, p {
+    color: white;
+}
+
+.home-back h1 {
+    font-size: 60px;
+    font-weight: bolder;
+}
+
+.home-back p {
+    font-size: 14px;
+}

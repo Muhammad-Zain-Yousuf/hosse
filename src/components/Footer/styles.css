@@ -1,0 +1,40 @@
+.footer-content {
+    color: white;
+}
+
+aside.footer-content h5 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+
+aside.footer-content ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+aside.footer-content ul li {
+    list-style-type: none;
+    margin: 5px;
+    padding: 0px;
+}
+
+aside.footer-content ul li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
+section.copyright {
+    background-color: black;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.copyright p{
+    margin: 0px;
+    padding: 0px;
+}

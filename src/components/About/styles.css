@@ -1,0 +1,15 @@
+.about h1{
+    color: black;
+    font-size: 40px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.about p{
+    color: black;
+    font-size: 15px;
+}
+
+.about {
+    min-height: 80vh;
+}
