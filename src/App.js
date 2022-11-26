@@ -8,6 +8,7 @@ import Footer from './components/Footer/Footer';
 import CourseDetails from './components/CourseDetails/CourseDetails';
 import SignUp from './components/SignUp/SignUp';
 import Login from './components/Login/Login';
+import{ Admin, Adminmain} from './components/Admin/Admin';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/adminadd" element={<Admin />} />
+            <Route path="/admin" element={<Adminmain />} />
+            <Route path="/adminmodify" element={<Adminmain />} />
             <Route path="/courses/:id" element={<CourseDetails />}/>
             <Route path="*" element={<NotFound />} />
           </Routes>

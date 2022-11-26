@@ -45,6 +45,75 @@ app.post('/loginrequest', async (req, res) => {
     
     // }
 });
+
+
+
+app.post('/addinst', async (req, res) => {
+    console.log('call inst');
+    const stat = await dbOperation.addinstructor(req.body);
+    // const result = await dbOperation.getresource(req.body.name);
+    console.log(stat);
+    if (stat == 1) {
+    res.send({result : 'Instructor Added Successfully'}); }
+    else {
+        res.send({result : 'Instructor Already Exists'});
+    }
+});
+app.post('/addcourse', async (req, res) => {
+    console.log('call course');
+    const stat = await dbOperation.addcourse(req.body);
+    // const result = await dbOperation.getresource(req.body.name);
+    console.log(stat);
+    if (stat == 1) {
+    res.send({result : 'Instructor Added Successfully'}); }
+    else {
+        res.send({result : 'Instructor Already Exists'});
+    }
+});
+
+
+
+
+
+app.post('/resource', async (req, res) => {
+    console.log('call res');
+    const stat = await dbOperation.addresource(req.body);
+    // const result = await dbOperation.getresource(req.body.name);
+    console.log(stat);
+    if (stat == 1) {
+    res.send({result : 'Instructor Added Successfully'}); }
+    else {
+        res.send({result : 'Instructor Already Exists'});
+    }
+});
+
+
+app.post('/addform', async (req, res) => {
+    console.log('call form');
+    const stat = await dbOperation.addform(req.body);
+    // const result = await dbOperation.getresource(req.body.name);
+    console.log(stat);
+    if (stat == 1) {
+    res.send({result : 'Instructor Added Successfully'}); }
+    else {
+        res.send({result : 'Instructor Already Exists'});
+    }
+});
+
+
+app.post('/addevent', async (req, res) => {
+    console.log('called');
+    const stat = await dbOperation.addevent(req.body);
+    // const result = await dbOperation.getresource(req.body.name);
+    console.log(stat);
+    if (stat == 1) {
+    res.send({result : 'Instructor Added Successfully'}); }
+    else {
+        res.send({result : 'Instructor Already Exists'});
+    }
+});
+
+
     
 
 // let Student = new Employee(1, 'Ali', 'Alavi', '1234', 'CS', 2019,  'ab01234@st.habib.edu.pk', 03001234567);

@@ -91,7 +91,7 @@ export const SignUp = () => {
 
                 <Form.Group className="mb-3">
                     <Form.Label>Student ID</Form.Label>
-                    <Form.Control name="StdID" type="text" placeholder="Enter ID" onChange={setInput} required/>
+                    <Form.Control name="StdID" type="number" placeholder="Enter ID" onChange={setInput} required/>
                 </Form.Group>
 
                 <Form.Group className="mb-3">

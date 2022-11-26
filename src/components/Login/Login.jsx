@@ -52,14 +52,15 @@ export const Login = () => {
             })
             })
             .then(res => res.json())
-            console.log(newData);
-            if (newData.status === 'success') {
+            console.log(newData.result[0].Student_id);
+            if (newData.status === 'success' && newData.result[0].Student_id=== 0) {
+                navigate('/admin');  // yahan dashboard aye ga  
+            }
+            else if (newData.status === 'success') {
                 navigate('/about');  // yahan dashboard aye ga
-                
+
                 
             }
-
-
             setReturnedData(newData[0]);
 
         }
