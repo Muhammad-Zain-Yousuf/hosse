@@ -17,7 +17,7 @@ const getUser = async(name) => {
     try {
         let pool = await sql.connect(config);
         let user = await pool.request().query("SELECT * Users");
-        console.log(resources)
+        console.log(user)
         return user;
     } catch (error) {
         console.log(error);
@@ -36,6 +36,19 @@ const createUser = async(User) => {
     }
 }
 
+
+const logIn = async(Creds) => {
+    try {
+        let pool = await sql.connect(config);
+        let user = await pool.request().query(`SELECT * from Users where student_email = '${Creds.Email}' and s_password = '${Creds.Password}'`);
+        // console.log(user)
+        return user;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     createUser,
+    logIn,
     getResources }

@@ -24,6 +24,27 @@ app.post('/hello', async (req, res) => {
     // const result = await dbOperation.getresource(req.body.name);
     res.send({result: 'hi'});
 });
+
+
+app.post('/loginrequest', async (req, res) => {
+    console.log('login_api_called');
+    const status = await dbOperation.logIn(req.body);
+    // if (status) {
+        // res.send({result: 'success'}, status.recordset);
+    // } else {
+    
+    if (status.recordset.length>0) 
+    {
+        // console.log("success");
+        res.send({result : status.recordset , status:'success' });
+    }
+
+    else {
+        res.send({result : 'failed' , status:'failed' });
+    }
+    
+    // }
+});
     
 
 // let Student = new Employee(1, 'Ali', 'Alavi', '1234', 'CS', 2019,  'ab01234@st.habib.edu.pk', 03001234567);
