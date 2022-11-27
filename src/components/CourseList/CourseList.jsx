@@ -44,7 +44,7 @@ const CourseList = (props) => {
           {filteredData.map( (course) => (
             <Col key={course.id} sm={12} lg={6} md={6} className='mb-4'>
               <Card>
-                <Card.Img style={{"width":"auto", "height": "250px"}} variant="top" src={course.picture} />
+                <Card.Img style={{"width":"auto", "height": "350px"}} variant="top" src={course.picture} />
                 <Card.Body>
                   <Card.Title>{course.title}</Card.Title>
                   <Link to={`/courses/${course.id}`}>

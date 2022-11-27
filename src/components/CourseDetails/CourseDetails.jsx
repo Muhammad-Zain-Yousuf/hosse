@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import data from '../../Data/db.json';
 import {Container, Col, Row, Button} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import "./styles.css";
 
 const CourseDetails = () => {
@@ -13,7 +14,7 @@ const CourseDetails = () => {
         <Container className='bg-dark mt-5 mb-5'>
             <Row className="d-flex align-items-center">
                 <Col sm={12} md={6} lg={6}>
-                    <img src={`../${course.picture}`} alt="Resource" style={{"width":"500px", "height": "350px", "padding": "20px"}} />
+                    <img src={`../${course.picture}`} alt="Resource" style={{"width":"500px", "height": "450px", "padding": "20px"}} />
                 </Col>
 
                 <Col sm={12} md={6} lg={6}>
@@ -25,9 +26,10 @@ const CourseDetails = () => {
                         <span className='course-details'>Resource Description:</span>
                         {course.desc}
                     </p>
-                    <a className='mb-5' href= {course.url} target="_blank" rel="noreferrer">
+
+                    <Link className='mb-5' to={course.url}>
                         <Button variant="primary">Go To Resource</Button>
-                    </a>
+                    </Link>
                 </Col>
             </Row>
         </Container>

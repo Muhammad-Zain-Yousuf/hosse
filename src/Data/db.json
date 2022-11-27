@@ -16,11 +16,11 @@
   },
 
   {
-    "id": "instructors",
-    "title": "Instructors",
-    "desc": "List of all instructors and departments at Habib University.",
-    "picture": "Cards/instructors.jpg",
-    "url": "https://habib.edu.pk/academics/"
+    "id": "forms",
+    "title": "Online Forms",
+    "desc": "List of important online forms of different offices at Habib Univerity.",
+    "picture": "Cards/forms.jpg",
+    "url": "/offices"
   },
 
   {
@@ -28,7 +28,7 @@
     "title": "Suggest a Resource!",
     "desc": " Help your fellow Habibians too! If you find a resource for a particular course that you think is relevant and important, please suggest the resource to the admin so that we can include it.",
     "picture": "Cards/suggestion.jpg",
-    "url": "/"
+    "url": "/suggestion"
   }
   
 ]
