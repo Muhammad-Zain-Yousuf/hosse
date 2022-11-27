@@ -28,10 +28,30 @@ app.post('/rsg', async (req, res) =>{
 
 app.post('/del', async (req, res) =>{
     console.log(req.body.id);
-    const result = await dbOperation.delResource(req.body.id);
+    const result = await dbOperation.modifytable(req.body.id);
     console.log(result);
     // res.send(result);
 });
+
+
+app.post('/modify', async (req, res) =>{
+    console.log(req.body.id);
+    if (req.body.col === 'Name'){
+        const result = await dbOperation.modifyname(req.body);
+    }
+    else if (req.body.col === 'link'){
+        const result = await dbOperation.modifylink(req.body);
+    }
+    else if (req.body.col === 'Type'){
+        const result = await dbOperation.modifytype(req.body);
+    }
+    else if (req.body.col === 'Course'){
+        const result = await dbOperation.modifycourse(req.body);
+    }
+    console.log("hogya");
+    res.send({result: 1});
+});
+
 
 app.post('/events', async (req, res) =>{
     console.log('call event');

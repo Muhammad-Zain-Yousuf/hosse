@@ -25,9 +25,9 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/courses/course_resource" element={<AcademicRes />} />
-            <Route path="/courses/events" element={<Events />} />
+            <Route path="/courses/courses" element={<Events />} />
             <Route path="/courses/instructors" element={<Instructors />} />
-            <Route path="/courses/course" element={<Courses />} />
+            <Route path="/courses/events" element={<Courses />} />
             <Route path="/courses/forms" element={<Forms />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />

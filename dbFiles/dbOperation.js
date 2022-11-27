@@ -24,6 +24,37 @@ const delResource = async(resinfo) => {
     }
 }
 
+const modifyname = async(resinfo) => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request().query(`Update Course_Resource set Resource_Name = '${resinfo.Name}' where Resource_id = ${resinfo.id}`);
+        // console.log(resources)
+        return resources.rowsAffected[0];;
+    } catch (error) {
+        console.log(error);
+    }
+}
+const modifylink = async(resinfo) => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request().query(`Update Course_Resource set Resource_link = '${resinfo.link}' where Resource_id = ${resinfo.id}`);
+        // console.log(resources)
+        return resources.rowsAffected[0];;
+    } catch (error) {
+        console.log(error);
+    }
+}
+const modifytype = async(resinfo) => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request().query(`Update Course_Resource set Res_category = '${resinfo.Type}' where Resource_id = ${resinfo.id}`);
+        // console.log(resources)
+        return resources.rowsAffected[0];;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const getEvent = async() => {
     try {
         let pool = await sql.connect(config);
@@ -170,5 +201,8 @@ module.exports = {
     getForms,
     getInstructors,
     getCourses,
-    delResource
+    delResource,
+    modifyname,
+    modifylink,
+    modifytype
 }
