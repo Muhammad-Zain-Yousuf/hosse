@@ -2,12 +2,66 @@ const config = require('./dbConfig'),
     sql = require('mssql');
 
 
-const getResources = async(name) => {
+const getResource = async() => {
     try {
         let pool = await sql.connect(config);
-        let resources = await pool.request().query("SELECT * FROM Courses");
-        console.log(resources)
-        return resources;
+        let resources = await pool.request().query("select CR.Resource_id, CR.Resource_Name, CR.Resource_link, Category_name, C.course_name from Course_Resource as CR inner join Resource_category as cat on CR.Res_Category = cat.Category_id inner join Courses as C on C.course_id = CR.Course_id");
+        // console.log(resources)
+        return resources.recordset;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const delResource = async(resinfo) => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request().query(`Delete from Course_Resource where Resource_id = ${resinfo.id}`);
+        // console.log(resources)
+        return resources.rowsAffected[0];;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const getEvent = async() => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request().query("select e.event_id, e.event_name, e.event_description , et.typename,  eo.organizer_name  from Events as e inner join Event_Types as et on e.event_type = et.typeid inner join event_organizer as eo on eo.organizer_id = e.organizer");
+        // console.log(resources)
+        return resources.recordset;
+    } catch (error) {
+        console.log(error);
+    }
+}
+const getCourses = async(name) => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request().query("SELECT c.course_id, c.course_name, c.course_level, c.course_code, dp.depart_name FROM Courses as c inner join Departments as dp on c.depart_id = dp.depart_id");
+        // console.log(resources)
+        return resources.recordset;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const getInstructors = async(name) => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request().query("SELECT c.id, c.instructor_name, c.instructor_email, dp.depart_name FROM Instructors as c inner join Departments as dp on c.depart_id = dp.depart_id");
+        // console.log(resources)
+        return resources.recordset;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const getForms = async(name) => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request().query("SELECT f.form_tool_id, f.form_name, f.form_link, f.form_description, fc.category_name, o.office_name FROM Forms_Tools as f inner join Form_category as fc on f.form_category = fc.category_id inner join Offices as o on o.office_id = f.office_id");
+        // console.log(resources)
+        return resources.recordset;
     } catch (error) {
         console.log(error);
     }
@@ -111,4 +165,10 @@ module.exports = {
     addresource,
     addform,
     addevent,
-    getResources }
+    getResource,
+    getEvent,
+    getForms,
+    getInstructors,
+    getCourses,
+    delResource
+}

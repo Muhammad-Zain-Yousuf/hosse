@@ -13,9 +13,52 @@ app.use(express.urlencoded())
 app.use(cors());
 
 app.post('/api', async (req, res) =>{
-    console.log('called');
-    const result =  await dbOperation.getresource(req.body.name);
+    console.log('call course');
+    const result =  await dbOperation.getResource(req.body.name);
     res.send(result.recordset);
+});
+
+app.post('/rsg', async (req, res) =>{
+    console.log('call resource');
+    const result =  await dbOperation.getResource();
+    // console.log(result);
+    res.send(result);
+});
+
+
+app.post('/del', async (req, res) =>{
+    console.log(req.body.id);
+    const result = await dbOperation.delResource(req.body.id);
+    console.log(result);
+    // res.send(result);
+});
+
+app.post('/events', async (req, res) =>{
+    console.log('call event');
+    const result =  await dbOperation.getEvent();
+    // console.log(result);
+    res.send(result);
+});
+
+app.post('/courses', async (req, res) =>{
+    console.log('call courses');
+    const result =  await dbOperation.getCourses();
+    // console.log(result);
+    res.send(result);
+});
+
+app.post('/instructors', async (req, res) =>{
+    console.log('call instructors');
+    const result =  await dbOperation.getInstructors();
+    // console.log(result);
+    res.send(result);
+});
+
+app.post('/forms', async (req, res) =>{
+    console.log('call forms');
+    const result =  await dbOperation.getForms();
+    // console.log(result);
+    res.send(result);
 });
 
 app.post('/hello', async (req, res) => {
@@ -120,8 +163,8 @@ app.post('/addevent', async (req, res) => {
     
 
 
-dbOperation.getResources().then(res => {
-    console.log(res); })
+// dbOperation.getResource().then(res => {
+//     console.log(res); })
 
 
 // dbOperation.creatUser();

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Container} from 'react-bootstrap';
+import {Col, Row,Button, Container} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import "./styles.css";
@@ -414,6 +414,113 @@ export const Admin = () => {
 
 
     );
+}
+
+
+
+
+export const Adminmodify = () => {
+
+    // const course = data.map( item => i);
+
+    const [returnedData, setReturnedData] = React.useState(['rsg']);
+    // const [resource, delResource] = React.useState({_id: 0});
+
+    // const setInput = (e) => {
+    //     const{name,value} = e.target;
+
+    //         delResource(prevState => ({
+    //             ...prevState, [name]:parseInt(value)
+    //         }))
+
+
+    // }
+
+
+    const delRes =  (id) => {
+        console.log(id)
+        const newData = fetch('/del' , {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({id})
+            })
+            
+
+        }
+
+
+    React.useEffect(() => {
+        const fetchData = async () => {
+            const newData = await fetch('/rsg' , {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                })
+                
+                .then(res => res.json())
+                // console.log(newData);
+                setReturnedData(newData);
+    
+            }
+        fetchData();
+        
+
+
+        
+
+    }, []);
+
+
+    
+    return( <div>
+        {returnedData.map(item => (
+        <div key={item.Resource_id}>
+        <Container className='bg-dark mt-5 mb-5'>
+        
+            <Row className="d-flex align-items-center">
+                {/* <Col sm={12} md={6} lg={6}>
+                    <img src={`../${item.picture}`} alt="Resource" style={{"width":"500px", "height": "350px", "padding": "20px"}} />
+                </Col> */}
+
+                <Col sm={12} md={6} lg={6}>
+                    <p className='mb-5'>
+                        <span className='course-details'>Resource Name:</span>
+                        {item.Resource_Name}
+                    </p>
+                    <p className='mb-5'>
+                        <span className='course-details'>For Course:</span>
+                        {item.course_name}
+                    </p>
+
+                    <p className='mb-5'>
+                        <span className='course-details'>Type:</span>
+                        {item.Category_name}
+                    </p>
+                    <a className='mb-5' href= {item.Resource_link} target="_blank" rel="noreferrer">
+                        <Button variant="primary">Go To Resource</Button>
+                    </a>
+
+                    <a className='mb-5'  target="_blank" rel="noreferrer">
+                        <Button variant="secondary">Modify</Button>
+                    </a>
+
+
+
+                        <Button variant="primary" type="submit" className='signUpSubmit mt-4' onClick = {()=> delRes({id:item.Resource_id})}>Delete</Button>
+                </Col>
+            </Row>
+        </Container>
+        </div>
+    ))};
+    </div>
+    )
+
+    //
 }
 
 // export default Adminmain;
