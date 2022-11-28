@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, Link, UseHistory} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/Home/Home';
 import Header from './components/Navbar/Navbar';
@@ -14,6 +14,7 @@ import Events from './components/Events/Events';
 import Instructors from './components/Instructors/Instructors';
 import Forms from './components/Forms/Forms';
 import Courses from './components/Courses/Courses';
+import Dashboard from './components/Login/Dashboard';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/adminadd" element={<Admin />} />
             <Route path="/admin" element={<Adminmain />} />
             <Route path="/adminmodify" element={<Adminmodify />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             {/* <Route path="/courses/:id" element={<CourseDetails />}/> */}
             <Route path="*" element={<NotFound />} />
           </Routes>

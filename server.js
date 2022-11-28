@@ -28,7 +28,7 @@ app.post('/rsg', async (req, res) =>{
 
 app.post('/del', async (req, res) =>{
     console.log(req.body.id);
-    const result = await dbOperation.modifytable(req.body.id);
+    const result = await dbOperation.delResource(req.body.id);
     console.log(result);
     // res.send(result);
 });
