@@ -186,6 +186,27 @@ const addevent = async(User) => {
         console.log(error);
     }
 }
+const addSuggestion = async(User) => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request()
+        .query(`INSERT INTO Resource_suggestions Values(resource_name, resource_link, Course) (${User.resname} , '${User.link}' , (Select course_id from Courses where course_name = '${User.Course}'))`);
+        return resources.rowsAffected[0];
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const viewUser = async(User) => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request()
+        .query(`SELECT s.Student_id, s.Student_name, m.major_name, s.batch, s.student_email, s.phone_number, d.depart_name, k.School_Name  FROM Users as s inner join Majors as m on m.major_id = s.major inner join Departments as d on d.depart_id = m.depart_id inner join School as k on k.School_id = d.School_id where student_id = ${User.id}`);
+        return resources.recordset;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 module.exports = {
@@ -204,5 +225,7 @@ module.exports = {
     delResource,
     modifyname,
     modifylink,
-    modifytype
+    modifytype,
+    addSuggestion,
+    viewUser
 }

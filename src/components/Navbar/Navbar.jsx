@@ -5,9 +5,20 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import './styles.css';
 import logo from "../../Assets/Home/logo.png";
+import {useGlobalState} from '../../App';
+
+
+
 
 const Header = () => {
+
+  // const {loggedin} = React.useContext(globalStateContext);
+  const [state, dispatch] = useGlobalState();
+  console.log(state.loggedin);
+
+
   return (
+    
     <Navbar bg="dark" variant="dark">
       <Container>
         <Navbar.Brand>
@@ -20,12 +31,24 @@ const Header = () => {
           <Link to="/about" className='links'>About</Link>
         </Nav>
 
+        {state.loggedin == false && (
+          <>
         <Nav className='ms-auto'>
           <Link to="/signup" className='links'>Sign Up</Link> 
         </Nav>
         <Nav className='me-auto'>
           <Link to="/Login" className='links'>Login</Link> 
         </Nav>
+      </>
+      )}
+
+      {state.loggedin ==true && (
+          <>
+        <Nav className='ms-auto'>
+          <Link to="/signup" className='links'>Logout</Link> 
+        </Nav>
+      </>
+      )}
 
       </Container>
     </Navbar>

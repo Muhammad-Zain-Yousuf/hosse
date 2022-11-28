@@ -1,9 +1,10 @@
-import React from 'react'
-import {Button, Container} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, { useRef } from 'react'
+import {Row , Col, Button, Container} from 'react-bootstrap';
+import { Link, useLocation } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import "./styles.css";
-import {Route ,  Navigate , useNavigate, useHistory} from 'react-router-dom';
+import {Route ,  Navigate , useNavigate} from 'react-router-dom';
+import Header from '../Navbar/Navbar';
 
 // async function loginUser(credentials) {
 //   return fetch('http://localhost:3000/about', {
@@ -18,90 +19,92 @@ import {Route ,  Navigate , useNavigate, useHistory} from 'react-router-dom';
 
 
 const Dashboard = () => {
-    
-    const navigate = useNavigate();
-    const data  = navigate;
-    console.log(data)
-
-    const [returnedData, setReturnedData] = React.useState(['hello']);
-    const [user,setUser] = React.useState({Email:'', Password:''});
-
-    // const navigate = useNavigate();
-
-    const setInput = (e) => {
-        const{name,value} = e.target;
-        if (name=== 'StdID'){
-            setUser(prevState => ({
-                ...prevState, [name]:parseInt(value)
-            }))
-            return;
-        }
-
-        setUser(prevState => ({
-            ...prevState, [name]:value
-        }));
-
-    }
-
-    const authentication = async () => {
-        const newData = await fetch('/loginrequest' , {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                ...user
-
-            })
-            })
-            .then(res => res.json())
-            console.log(newData.result[0].Student_id);
-            if (newData.status === 'success' && newData.result[0].Student_id=== 0) {
-                navigate('/admin');  // yahan dashboard aye ga  
-            }
-            else if (newData.status === 'success') {
-                navigate('/about');  // yahan dashboard aye ga
-
-                
-            }
-            setReturnedData(newData[0]);
-
-        }
 
     
+    const {state}  = useLocation();
+    const {std_id} = state; 
+    // console.log(std_id);
 
 
+    const [returnedData, setReturnedData] = React.useState(['dashboard']);
 
-    return (
-        <Container className='fluid mb-4 loginbox mt-4'>
-            <h1 className='text-center'>Dashboard</h1>
-            <Form>
-                {/* Username */}
-
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control name = "Email" type="email" placeholder="Enter Email" onChange={setInput} required/>
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control name="Password" type="password" placeholder="Password" onChange={setInput} required/>
-                </Form.Group>
-
-                <Button variant="primary" className='signUpSubmit mt-4' onClick={() => authentication()}>
-                    Login
-                </Button>
-
-                <p className='text-center'>
-                    Don't have an account? <br />
-                    <Link to="/signup">Create one here</Link>
-                </p>
+    React.useEffect(() => {
+        const fetchData = async () => {
+            const newData = await fetch('/dashboard' , {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ id: std_id })
+                })
                 
-            </Form>
+                .then(res => res.json())
+                console.log(newData);
+                setReturnedData(newData);
+    
+            }
+        fetchData();
+
+    }, []);
+
+
+    return( 
+        
+        <Container className='bg-dark mt-5 mb-5'>
+        <h1 className='text-center' >Hello, {returnedData.Student_name}</h1>  // iskp white krna hai color black arha hai
+
+            <Row className="d-flex align-items-center">
+
+                <Col sm={12} md={6} lg={6}>
+                    <p className='mb-5'>
+                        <span className='course-details'>Your ID:</span>
+                        {returnedData.Student_id}
+                    </p>
+                    <p className='mb-5'>
+                        <span className='course-details'>Major:</span>
+                        {returnedData.major_name}
+                    </p>
+
+                    <p className='mb-5'>
+                        <span className='course-details'>Batch:</span>
+                        {returnedData.batch}
+                    </p>
+                    <p className='mb-5'>
+                        <span className='course-details'>Department:</span>
+                        {returnedData.depart_name}
+                    </p>
+                    <p className='mb-5'>
+                        <span className='course-details'>School:</span>
+                        {returnedData.School_Name}
+                    </p>
+
+                    <p className='mb-5'>
+                        <span className='course-details'>Your Email:</span>
+                        {returnedData.student_email}
+                    </p>
+
+                    <p className='mb-5'>
+                        <span className='course-details'>Contact Number:</span>
+                        {returnedData.phone_number}
+                    </p>
+                </Col>
+            </Row>
+
             
         </Container>
-    );
+    )
 }
 
 export default Dashboard;
+
+
+
+
+
+
+
+
+
+
+    

@@ -1,4 +1,5 @@
 import {BrowserRouter as Router, Route, Routes, Link, UseHistory} from 'react-router-dom';
+import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/Home/Home';
 import Header from './components/Navbar/Navbar';
@@ -16,8 +17,49 @@ import Forms from './components/Forms/Forms';
 import Courses from './components/Courses/Courses';
 import Dashboard from './components/Login/Dashboard';
 
-function App() {
+
+
+
+const Globalstate = {
+  loggedin: true,
+  id: undefined
+};
+
+const globalStateContext = React.createContext(Globalstate);
+const dispatchStateContext = React.createContext(undefined);
+
+const GlobalStateProvider = ({ children }) => {
+  const [state, dispatch] = React.useReducer(
+    (state, newValue) => ({ ...state, ...newValue }),
+    Globalstate
+  );
   return (
+    <globalStateContext.Provider value={state}>
+      <dispatchStateContext.Provider value={dispatch}>
+        {children}
+      </dispatchStateContext.Provider>
+    </globalStateContext.Provider>
+  );
+};
+
+
+const useGlobalState = () => [
+  React.useContext(globalStateContext),
+  React.useContext(dispatchStateContext)
+];
+
+
+
+
+
+
+
+// function App() {
+const App = () => (
+
+  <GlobalStateProvider>
+
+  {/* return ( */}
     <Router>
       <div className="App">
         <Header />
@@ -43,7 +85,10 @@ function App() {
         <Footer />
       </div>
     </Router>
-  );
-}
+  {/* ) */}
+  </GlobalStateProvider>
+);
+//{
 
 export default App;
+export { useGlobalState };

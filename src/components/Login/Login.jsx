@@ -61,19 +61,14 @@ export const Login = () =>  {
             else if (newData.status === 'success') {
                 
                 // navigate('/dashboard');
-                navigate('/dashboard', {data: newData.result[0].Student_id});
-                
-                
-  // yahan dashboard aye ga
-
-                
+                navigate('/dashboard', {state: { std_id: newData.result[0].Student_id} });
+            }
+            else {
+                alert('Invalid Credentials');
             }
             setReturnedData(newData[0]);
 
         }
-
-    
-
 
 
     return (
