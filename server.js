@@ -185,16 +185,28 @@ app.post('/addsugg', async (req, res) => {
     if (stat == 1) {
     res.send({result : 'Suggestion Added Successfully'}); }
     else {
-        res.send({result : 'Suggestion Already Exists'});
+        res.send({result : 'Error Occured'});
+    }
+});
+app.post('/visitedres', async (req, res) => {
+    console.log(req.body);
+    const stat = await dbOperation.addHistory(req.body);
+    // const result = await dbOperation.getresource(req.body.name);
+    console.log(stat);
+    if (stat == 1) {
+    res.send({result : 'Suggestion Added Successfully'}); }
+    else {
+        res.send({result : 'Error Occured'});
     }
 });
 
 
 app.post('/dashboard', async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const stat = await dbOperation.viewUser(req.body);
-    console.log(stat[0]);
-    res.send(stat[0]);
+    const stat2 = await dbOperation.viewHistory(req.body);
+    // console.log(stat2);
+    res.send({res: stat[0], res2: stat2});
 });
 
 

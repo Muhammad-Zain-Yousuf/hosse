@@ -16,39 +16,9 @@ import Instructors from './components/Instructors/Instructors';
 import Forms from './components/Forms/Forms';
 import Courses from './components/Courses/Courses';
 import Dashboard from './components/Login/Dashboard';
+import Suggestion from './components/Suggestion/Suggestion';
 
-
-
-
-const Globalstate = {
-  loggedin: true,
-  id: undefined
-};
-
-const globalStateContext = React.createContext(Globalstate);
-const dispatchStateContext = React.createContext(undefined);
-
-const GlobalStateProvider = ({ children }) => {
-  const [state, dispatch] = React.useReducer(
-    (state, newValue) => ({ ...state, ...newValue }),
-    Globalstate
-  );
-  return (
-    <globalStateContext.Provider value={state}>
-      <dispatchStateContext.Provider value={dispatch}>
-        {children}
-      </dispatchStateContext.Provider>
-    </globalStateContext.Provider>
-  );
-};
-
-
-const useGlobalState = () => [
-  React.useContext(globalStateContext),
-  React.useContext(dispatchStateContext)
-];
-
-
+import { GlobalStateProvider } from './components/Login/Login';
 
 
 
@@ -78,6 +48,7 @@ const App = () => (
             <Route path="/admin" element={<Adminmain />} />
             <Route path="/adminmodify" element={<Adminmodify />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/courses/suggestion" element={<Suggestion />} />
             {/* <Route path="/courses/:id" element={<CourseDetails />}/> */}
             <Route path="*" element={<NotFound />} />
           </Routes>
@@ -91,4 +62,4 @@ const App = () => (
 //{
 
 export default App;
-export { useGlobalState };
+// export { useGlobalState };

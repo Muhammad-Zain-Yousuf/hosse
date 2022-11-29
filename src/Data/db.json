@@ -24,6 +24,21 @@
   },
 
   {
+    "id": "forms",
+    "title": "Forms / Office Resources",
+    "desc": "List of all instructors and departments at Habib University.",
+    "picture": "Cards/instructors.jpg",
+    "url": "https://habib.edu.pk/academics/"
+  },
+  {
+    "id": "courses",
+    "title": "Courses",
+    "desc": "List of all instructors and departments at Habib University.",
+    "picture": "Cards/instructors.jpg",
+    "url": "https://habib.edu.pk/academics/"
+  },
+
+  {
     "id": "suggestion",
     "title": "Suggest a Resource!",
     "desc": " Help your fellow Habibians too! If you find a resource for a particular course that you think is relevant and important, please suggest the resource to the admin so that we can include it.",
