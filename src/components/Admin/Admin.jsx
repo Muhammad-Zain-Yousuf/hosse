@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import {Col, Row,Button, Container} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -355,6 +355,7 @@ export const Admin = () => {
                     <Form.Control name = "category" type="text" placeholder="Enter category" onChange={setInput4}  required/>
                 </Form.Group>
 
+                
                 <Form.Group className="mb-3">
                     <Form.Label>Office Name</Form.Label>
                     <Form.Control name = "office" type="text" placeholder="Enter Office" onChange={setInput4} required/>
@@ -424,17 +425,35 @@ export const Adminmodify = () => {
     // const course = data.map( item => i);
 
     const [returnedData, setReturnedData] = React.useState(['rsg']);
-    // const [resource, delResource] = React.useState({_id: 0});
+    const [user,setUser] = React.useState({id:0, Name:'', Course:'', Type:'', link: ''})
+    
 
-    // const setInput = (e) => {
-    //     const{name,value} = e.target;
-
-    //         delResource(prevState => ({
-    //             ...prevState, [name]:parseInt(value)
-    //         }))
+    const [showForm, setShowForm] = React.useState(false);
+    const [idd, setId] = React.useState(0);
+    const [fieldd, setfield] = React.useState('');
 
 
-    // }
+      
+
+        const getid = async (item) => {
+            
+            setShowForm(!showForm);
+            setId(item.id);
+            setUser(prevState => ({...prevState, id:item.id}))
+            setfield(item.field);
+            console.log(item.field);
+            console.log(idd);
+            }
+
+
+            const setInput = (e) => {
+                const{name,value} = e.target;
+                setUser(prevState => ({
+                    ...prevState, [name]:value
+                }));
+        
+            }
+    
 
 
     const delRes =  (id) => {
@@ -475,6 +494,28 @@ export const Adminmodify = () => {
 
     }, []);
 
+    const modifytable = async (column) => {
+        const newData = await fetch('/modify' , {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({...user, col:column
+
+
+            })
+            })
+            .then(res => res.json())
+            console.log(newData);
+            if (newData.result === 1) {
+                alert('Updated Successfully');
+            }
+
+        }
+
+
+
 
     
     return( <div>
@@ -492,23 +533,74 @@ export const Adminmodify = () => {
                         <span className='course-details'>Resource Name:</span>
                         {item.Resource_Name}
                     </p>
+                    
+                    <a className='mb-5'  target="_blank" onClick={() => getid({id:item.Resource_id, field: 'Name' })} rel="noreferrer">
+                        Modify
+                    </a>
+
                     <p className='mb-5'>
                         <span className='course-details'>For Course:</span>
                         {item.course_name}
                     </p>
+                    <a className='mb-5'  target="_blank" onClick={() => getid({id:item.Resource_id, field: 'Course' })} rel="noreferrer">
+                        Modify
+                    </a>
 
                     <p className='mb-5'>
                         <span className='course-details'>Type:</span>
                         {item.Category_name}
                     </p>
+                    <a className='mb-5'  target="_blank" onClick={() => getid({id:item.Resource_id, field: 'Type' })} rel="noreferrer">
+                        Modify
+                    </a>
                     <a className='mb-5' href= {item.Resource_link} target="_blank" rel="noreferrer">
                         <Button variant="primary">Go To Resource</Button>
                     </a>
 
-                    <a className='mb-5'  target="_blank" rel="noreferrer">
-                        <Button variant="secondary">Modify</Button>
+                    <a className='mb-5'  target="_blank" onClick={() => getid({id:item.Resource_id, field: 'Link' })} rel="noreferrer">
+                        Modify
                     </a>
 
+                    <div>
+                        {showForm && (idd === item.Resource_id) && (fieldd === 'Name') && (
+                            <form>
+                                <input name = "Name" type="text" placeholder="Enter new Name" onChange = {setInput} />
+                                <Button variant="secondary" onClick = {() => modifytable('Name')} >Confirm Changes</Button>
+
+                            </form>
+                        )}
+                        </div>
+
+                        <div>
+                        {showForm && (idd === item.Resource_id) && (fieldd === 'Link') && (
+                            <form>
+                                <input name = "link" type="text" placeholder="Enter new Link" onChange = {setInput} />
+                                <Button variant="secondary" onClick = {() => modifytable('link')} >Confirm Changes</Button>
+
+                            </form>
+                        )}
+                        </div>
+
+
+                        <div>
+                        {showForm && (idd === item.Resource_id) && (fieldd === 'Course') && (
+                            <form>
+                                <input name= "Course" type="text" placeholder="Enter new Course" onChange = {setInput} />
+                                <Button variant="secondary" onClick = {() => modifytable('Course')} >Confirm Changes</Button>
+
+                            </form>
+                        )}
+                        </div>
+
+                        <div>
+                        {showForm && (idd === item.Resource_id) && (fieldd === 'Type') && (
+                            <form>
+                                <input name = "Type" type="text" placeholder="Enter new type" onChange = {setInput} />
+                                <Button variant="secondary" onClick = {() => modifytable('Type')} >Confirm Changes</Button>
+
+                            </form>
+                        )}
+                        </div>
 
 
                         <Button variant="primary" type="submit" className='signUpSubmit mt-4' onClick = {()=> delRes({id:item.Resource_id})}>Delete</Button>

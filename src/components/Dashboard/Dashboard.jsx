@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import "./styles.css";
 import {Route ,  Navigate , useNavigate} from 'react-router-dom';
-import Dashboard from './Dashboard'
 
 // async function loginUser(credentials) {
 //   return fetch('http://localhost:3000/about', {
@@ -18,13 +17,12 @@ import Dashboard from './Dashboard'
 // }
 
 
-export const Login = () =>  {
+export const Login = () => {
+
     const [returnedData, setReturnedData] = React.useState(['hello']);
     const [user,setUser] = React.useState({Email:'', Password:''});
 
     const navigate = useNavigate();
-    // const history = useHistory();
-
 
     const setInput = (e) => {
         const{name,value} = e.target;
@@ -59,12 +57,7 @@ export const Login = () =>  {
                 navigate('/admin');  // yahan dashboard aye ga  
             }
             else if (newData.status === 'success') {
-                
-                // navigate('/dashboard');
-                navigate('/dashboard', {data: newData.result[0].Student_id});
-                
-                
-  // yahan dashboard aye ga
+                navigate('/about');  // yahan dashboard aye ga
 
                 
             }
@@ -102,16 +95,9 @@ export const Login = () =>  {
                 </p>
                 
             </Form>
-
-            {/* <div>
-            <Dashboard data={user}  />
-                </div> */}
             
         </Container>
-
-
     );
-
 }
 
 export default Login;

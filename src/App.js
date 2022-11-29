@@ -1,11 +1,11 @@
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/Home/Home';
 import Header from './components/Navbar/Navbar';
 import About from './components/About/About';
 import NotFound from './NotFound';
 import Footer from './components/Footer/Footer';
-import CourseDetails from './components/CourseDetails/CourseDetails';
+// import CourseDetails from './components/CourseDetails/CourseDetails';
 import SignUp from './components/SignUp/SignUp';
 import Login from './components/Login/Login';
 import{ Admin, Adminmain, Adminmodify} from './components/Admin/Admin';
@@ -14,6 +14,7 @@ import Events from './components/Events/Events';
 import Instructors from './components/Instructors/Instructors';
 import Forms from './components/Forms/Forms';
 import Courses from './components/Courses/Courses';
+import Dashboard from './components/Login/Dashboard';
 
 function App() {
   return (
@@ -25,16 +26,16 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/courses/course_resource" element={<AcademicRes />} />
-            <Route path="/courses/events" element={<Events />} />
+            <Route path="/courses/courses" element={<Events />} />
             <Route path="/courses/instructors" element={<Instructors />} />
-            <Route path="/courses/course" element={<Courses />} />
+            <Route path="/courses/events" element={<Courses />} />
             <Route path="/courses/forms" element={<Forms />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/courses/:id" element={<CourseDetails />}/>
             <Route path="/adminadd" element={<Admin />} />
             <Route path="/admin" element={<Adminmain />} />
             <Route path="/adminmodify" element={<Adminmodify />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             {/* <Route path="/courses/:id" element={<CourseDetails />}/> */}
             <Route path="*" element={<NotFound />} />
           </Routes>

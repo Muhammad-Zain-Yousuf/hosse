@@ -1,13 +1,13 @@
 const config = {
-    user :'hosseuser',
+    user :'hosseuser2',
     password: '1234',
-    server: 'MUHAMMADS', // wo name jo connect krte we / se pehle aye
+    server: 'DESKTOP-NMEG0OH', // wo name jo connect krte we / se pehle aye
     database: 'OSSE',
     options: {
         trustServerCertificate: true,
         trustedConnection: false,
         enableArithAbort: true,
-        instancename: 'NEW' // Instance name jo connect mai / k bad aye
+        instancename: '' // Instance name jo connect mai / k bad aye
     },
     port:1433
 

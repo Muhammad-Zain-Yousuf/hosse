@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import data from '../../Data/db.json';
-import {Container, Col, Row, Button} from 'react-bootstrap';
+import {Container, Col, Row, Button, InputGroup, FormControl} from 'react-bootstrap';
 import "./styles.css";
 
 const AcademicRes = () => {
@@ -26,17 +26,46 @@ const AcademicRes = () => {
     
             }
         fetchData();
-        
-
-
-        
+          
 
     }, []);
 
+    const [inputText, setInputText] = useState("");
+  
+    const handleOnChange = (e) => {
+
+        var lowerCase = e.target.value.toLowerCase();
+        setInputText(lowerCase);
+    }
+
+    const filteredData = returnedData.filter((el) => {
+        //if no input the return the original
+        if (inputText === '') {
+            return el;
+        }
+        //return the item which contains the user input
+        else {
+            return el.event_name.toLowerCase().includes(inputText);
+        }
+    });
 
     
-    return( <div>
-        {returnedData.map(item => (
+    return( 
+        <>
+        <Row>
+            <Col sm={12} lg={12} md={12} className='mb-4'>
+                <InputGroup>
+                    <FormControl
+                    placeholder="Search an event"
+                    aria-label="Search"
+                    aria-describedby="basic-addon2"
+                    onChange={handleOnChange}
+                    />
+                </InputGroup>
+            </Col>
+        </Row>
+        <div>
+        {filteredData.map(item => (
         <div key={item.event_id}>
         <Container className='bg-dark mt-5 mb-5'>
         
@@ -73,6 +102,7 @@ const AcademicRes = () => {
         </div>
     ))};
     </div>
+    </>
     )
 
     //
