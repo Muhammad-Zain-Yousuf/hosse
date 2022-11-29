@@ -532,35 +532,38 @@ export const Adminmodify = () => {
                     <p className='mb-5'>
                         <span className='course-details'>Resource Name:</span>
                         {item.Resource_Name}
+                        <a className='ms-2 mt-2 btn btn-secondary'  target="_blank" onClick={() => getid({id:item.Resource_id, field: 'Name' })} rel="noreferrer">
+                            Modify
+                        </a>
                     </p>
-                    
-                    <a className='mb-5'  target="_blank" onClick={() => getid({id:item.Resource_id, field: 'Name' })} rel="noreferrer">
-                        Modify
-                    </a>
+
 
                     <p className='mb-5'>
                         <span className='course-details'>For Course:</span>
                         {item.course_name}
+                        <a className='ms-2 btn btn-secondary'  target="_blank" onClick={() => getid({id:item.Resource_id, field: 'Course' })} rel="noreferrer">
+                            Modify
+                        </a>
                     </p>
-                    <a className='mb-5'  target="_blank" onClick={() => getid({id:item.Resource_id, field: 'Course' })} rel="noreferrer">
-                        Modify
-                    </a>
 
                     <p className='mb-5'>
                         <span className='course-details'>Type:</span>
                         {item.Category_name}
+                        <a className='ms-2 btn btn-secondary'  target="_blank" onClick={() => getid({id:item.Resource_id, field: 'Type' })} rel="noreferrer">
+                            Modify
+                        </a>
                     </p>
-                    <a className='mb-5'  target="_blank" onClick={() => getid({id:item.Resource_id, field: 'Type' })} rel="noreferrer">
-                        Modify
-                    </a>
+                    
                     <a className='mb-5' href= {item.Resource_link} target="_blank" rel="noreferrer">
-                        <Button variant="primary">Go To Resource</Button>
+                        <Button variant="primary">Link To Resource</Button>
                     </a>
 
-                    <a className='mb-5'  target="_blank" onClick={() => getid({id:item.Resource_id, field: 'Link' })} rel="noreferrer">
-                        Modify
+                    <a className='ms-2 btn btn-secondary'  target="_blank" onClick={() => getid({id:item.Resource_id, field: 'Link' })} rel="noreferrer">
+                        Modify Link
                     </a>
 
+                    <Button variant="danger" type="submit" className='signUpSubmit mt-4' onClick = {()=> delRes({id:item.Resource_id})}>Delete</Button>
+                    
                     <div>
                         {showForm && (idd === item.Resource_id) && (fieldd === 'Name') && (
                             <form>
@@ -603,7 +606,7 @@ export const Adminmodify = () => {
                         </div>
 
 
-                        <Button variant="primary" type="submit" className='signUpSubmit mt-4' onClick = {()=> delRes({id:item.Resource_id})}>Delete</Button>
+                        
                 </Col>
             </Row>
         </Container>
