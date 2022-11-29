@@ -186,6 +186,52 @@ const addevent = async(User) => {
         console.log(error);
     }
 }
+const addSuggestion = async(User) => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request()
+        .query(`INSERT INTO Resource_suggestions(student_id, resource_name, resource_link, Course) Values(${User.id},'${User.Name}' , '${User.Link}' , (Select course_id from Courses where course_name = '${User.Course}'))`);
+        return resources.rowsAffected[0];
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const addHistory = async(view) => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request()
+        .query(`INSERT INTO Resource_view(student_id, resource_id, view_date) Values(${view.stdid},${view.resid} , GETDATE())`);
+        return resources.rowsAffected[0];
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const viewUser = async(User) => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request()
+        .query(`SELECT s.Student_id, s.Student_name, m.major_name, s.batch, s.student_email, s.phone_number, d.depart_name, k.School_Name  FROM Users as s inner join Majors as m on m.major_id = s.major inner join Departments as d on d.depart_id = m.depart_id inner join School as k on k.School_id = d.School_id where student_id = ${User.id}`);
+        return resources.recordset;
+    } catch (error) {
+        console.log(error);
+    }
+}
+const viewHistory = async(User) => {
+    try {
+        let pool = await sql.connect(config);
+        let resources = await pool.request()
+        .query(`select rv.view_id, Resource_Name, c.course_name, rc.Category_name, rv.view_date from Resource_view as rv inner join Course_Resource as cr on cr.Resource_id=rv.resource_id
+        inner join Courses as c on c.course_id=cr.Course_id inner join Resource_category as rc on rc.Category_id=cr.Res_Category
+        where student_id = ${User.id} and rv.view_id in (
+        select top 1 view_id from Resource_view where resource_id=rv.resource_id order by 
+        view_id desc)`);
+        return resources.recordset;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 module.exports = {
@@ -204,5 +250,9 @@ module.exports = {
     delResource,
     modifyname,
     modifylink,
-    modifytype
+    modifytype,
+    addSuggestion,
+    viewUser,
+    addHistory,
+    viewHistory
 }

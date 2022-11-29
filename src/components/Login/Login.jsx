@@ -17,6 +17,40 @@ import Dashboard from './Dashboard'
 //     .then(data => data.json())
 // }
 
+let Globalstate = {
+    loggedin: false,
+    id: 0
+  };
+  
+  const globalStateContext = React.createContext(Globalstate);
+  const dispatchStateContext = React.createContext(undefined);
+  
+  const GlobalStateProvider = ({ children }) => {
+    const [state, dispatch] = React.useReducer((
+      (state, newValue) => ({ ...state, ...newValue })),
+      Globalstate
+    );
+    console.log(state);
+    return (
+      <globalStateContext.Provider value={state}>
+        <dispatchStateContext.Provider value={dispatch}>
+          {children}
+        </dispatchStateContext.Provider>
+      </globalStateContext.Provider>
+    );
+    
+  };
+  
+  
+  const useGlobalState = () => [
+    React.useContext(globalStateContext),
+    React.useContext(dispatchStateContext)
+  ];
+  
+  
+
+
+
 
 export const Login = () =>  {
     const [returnedData, setReturnedData] = React.useState(['hello']);
@@ -61,19 +95,14 @@ export const Login = () =>  {
             else if (newData.status === 'success') {
                 
                 // navigate('/dashboard');
-                navigate('/dashboard', {data: newData.result[0].Student_id});
-                
-                
-  // yahan dashboard aye ga
-
-                
+                navigate('/dashboard', {state: { std_id: newData.result[0].Student_id} });
+            }
+            else {
+                alert('Invalid Credentials');
             }
             setReturnedData(newData[0]);
 
         }
-
-    
-
 
 
     return (
@@ -115,3 +144,4 @@ export const Login = () =>  {
 }
 
 export default Login;
+export {GlobalStateProvider, useGlobalState};

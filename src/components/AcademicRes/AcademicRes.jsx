@@ -3,10 +3,13 @@ import { useParams } from 'react-router-dom';
 import data from '../../Data/db.json';
 import {Container, Col, Row, Button, InputGroup, FormControl} from 'react-bootstrap';
 import "./styles.css";
+import { useGlobalState } from '../Login/Login';
 
 const AcademicRes = () => {
 
     // const course = data.map( item => i);
+
+    const [state, dispatch] = useGlobalState();
 
     const [returnedData, setReturnedData] = React.useState(['rsg']);
 
@@ -30,7 +33,7 @@ const AcademicRes = () => {
     }, []);
 
     const [inputText, setInputText] = useState("");
-  
+
     const handleOnChange = (e) => {
 
         var lowerCase = e.target.value.toLowerCase();
@@ -47,6 +50,26 @@ const AcademicRes = () => {
             return el.Resource_Name.toLowerCase().includes(inputText);
         }
     });
+
+    const VisitHistory = async (_resid) => {
+        console.log('clicked')
+        const newData = await fetch('/visitedres' , {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            
+            body: JSON.stringify({ resid: _resid, stdid: state.id })
+
+        })
+            
+            .then(res => res.json())
+            console.log(newData);
+
+        }
+
+
     
     return( 
         <div className='mt-5 mb-5'>
@@ -84,24 +107,23 @@ const AcademicRes = () => {
                                     {item.course_name}
                                 </p>
 
-                                <p className='mb-5'>
-                                    <span className='course-details'>Type:</span>
-                                    {item.Category_name}
-                                </p>
-                                <a className='mb-5' href= {item.Resource_link} target="_blank" rel="noreferrer">
-                                    <Button variant="primary">Go To Resource</Button>
-                                </a>
-                            </Col>
-                        </Row>
-                        </Container>
-                    </div>
-                ))}
-            
+                    <p className='mb-5'>
+                        <span className='course-details'>Type:</span>
+                        {item.Category_name}
+                    </p>
+                    <a className='mb-2' href= {item.Resource_link} target="_blank" rel="noreferrer">
+                        <Button variant="primary" className='mb-3' onClick={()=> VisitHistory(item.Resource_id)}>Go To Resource</Button>
+                    </a>
+                </Col>
+            </Row>
+        </Container>
         </div>
-    )
-    
-    //
+        ))
+        }
+        </div>
+    );
 }
+
 
 
 export default AcademicRes;

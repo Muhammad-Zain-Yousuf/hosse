@@ -57,7 +57,7 @@ const AcademicRes = () => {
 
 
                     <a className='mb-5' href= {item.instructor_email}  target="_blank" rel="noreferrer">
-                        <Button variant="primary">Contact Now</Button>
+                        <Button variant="primary" className='mb-3'>Contact Now</Button>
                     </a>
                 </Col>
             </Row>

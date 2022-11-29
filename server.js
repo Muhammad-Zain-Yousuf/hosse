@@ -177,6 +177,39 @@ app.post('/addevent', async (req, res) => {
 });
 
 
+app.post('/addsugg', async (req, res) => {
+    console.log('called suggestion');
+    const stat = await dbOperation.addSuggestion(req.body);
+    // const result = await dbOperation.getresource(req.body.name);
+    console.log(stat);
+    if (stat == 1) {
+    res.send({result : 'Suggestion Added Successfully'}); }
+    else {
+        res.send({result : 'Error Occured'});
+    }
+});
+app.post('/visitedres', async (req, res) => {
+    console.log(req.body);
+    const stat = await dbOperation.addHistory(req.body);
+    // const result = await dbOperation.getresource(req.body.name);
+    console.log(stat);
+    if (stat == 1) {
+    res.send({result : 'Suggestion Added Successfully'}); }
+    else {
+        res.send({result : 'Error Occured'});
+    }
+});
+
+
+app.post('/dashboard', async (req, res) => {
+    // console.log(req.body);
+    const stat = await dbOperation.viewUser(req.body);
+    const stat2 = await dbOperation.viewHistory(req.body);
+    // console.log(stat2);
+    res.send({res: stat[0], res2: stat2});
+});
+
+
     
 
 // let Student = new Employee(1, 'Ali', 'Alavi', '1234', 'CS', 2019,  'ab01234@st.habib.edu.pk', 03001234567);

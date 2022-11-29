@@ -1,4 +1,5 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, Link, UseHistory} from 'react-router-dom';
+import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/Home/Home';
 import Header from './components/Navbar/Navbar';
@@ -15,9 +16,20 @@ import Instructors from './components/Instructors/Instructors';
 import Forms from './components/Forms/Forms';
 import Courses from './components/Courses/Courses';
 import Dashboard from './components/Login/Dashboard';
+import Suggestion from './components/Suggestion/Suggestion';
 
-function App() {
-  return (
+import { GlobalStateProvider } from './components/Login/Login';
+
+
+
+
+
+// function App() {
+const App = () => (
+
+  <GlobalStateProvider>
+
+  {/* return ( */}
     <Router>
       <div className="App">
         <Header />
@@ -36,6 +48,7 @@ function App() {
             <Route path="/admin" element={<Adminmain />} />
             <Route path="/adminmodify" element={<Adminmodify />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/courses/suggestion" element={<Suggestion />} />
             {/* <Route path="/courses/:id" element={<CourseDetails />}/> */}
             <Route path="*" element={<NotFound />} />
           </Routes>
@@ -43,7 +56,10 @@ function App() {
         <Footer />
       </div>
     </Router>
-  );
-}
+  {/* ) */}
+  </GlobalStateProvider>
+);
+//{
 
 export default App;
+// export { useGlobalState };

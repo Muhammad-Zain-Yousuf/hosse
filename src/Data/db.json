@@ -16,11 +16,26 @@
   },
 
   {
-    "id": "forms",
-    "title": "Online Forms",
+    "id": "instructors",
+    "title": "Instructors",
     "desc": "List of important online forms of different offices at Habib Univerity.",
-    "picture": "Cards/forms.jpg",
+    "picture": "Cards/instructors.jpg",
     "url": "/offices"
+  },
+
+  {
+    "id": "forms",
+    "title": "Forms / Office Resources",
+    "desc": "List of all instructors and departments at Habib University.",
+    "picture": "Cards/forms.jpg",
+    "url": "https://habib.edu.pk/academics/"
+  },
+  {
+    "id": "courses",
+    "title": "Courses",
+    "desc": "List of all instructors and departments at Habib University.",
+    "picture": "Cards/courses.jpg",
+    "url": "https://habib.edu.pk/academics/"
   },
 
   {
