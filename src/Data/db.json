@@ -27,14 +27,14 @@
     "id": "forms",
     "title": "Forms / Office Resources",
     "desc": "List of all instructors and departments at Habib University.",
-    "picture": "Cards/instructors.jpg",
+    "picture": "Cards/python.jpg",
     "url": "https://habib.edu.pk/academics/"
   },
   {
     "id": "courses",
     "title": "Courses",
     "desc": "List of all instructors and departments at Habib University.",
-    "picture": "Cards/instructors.jpg",
+    "picture": "Cards/react.png",
     "url": "https://habib.edu.pk/academics/"
   },
 

@@ -90,7 +90,7 @@ app.post('/hello', async (req, res) => {
 
 
 app.post('/loginrequest', async (req, res) => {
-    console.log('login_api_called');
+    console.log('login_api_calledd');
     const status = await dbOperation.logIn(req.body);
     // if (status) {
         // res.send({result: 'success'}, status.recordset);
@@ -202,11 +202,18 @@ app.post('/visitedres', async (req, res) => {
 
 
 app.post('/dashboard', async (req, res) => {
-    // console.log(req.body);
+    console.log("db called");
     const stat = await dbOperation.viewUser(req.body);
+    // console.log(stat[0]);
+    // res.send({res: stat[0], res2: stat2});
+    res.send(stat[0])
+});
+app.post('/dashboard2', async (req, res) => {
+    console.log("db called22");
     const stat2 = await dbOperation.viewHistory(req.body);
-    // console.log(stat2);
-    res.send({res: stat[0], res2: stat2});
+    console.log(stat2);
+    // res.send({res: stat[0], res2: stat2});
+    res.send(stat2)
 });
 
 

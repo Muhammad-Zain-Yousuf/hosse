@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import {Row , Col, Button, Container} from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -27,12 +27,13 @@ const Dashboard = () => {
     
     const {state}  = useLocation();
     const {std_id} = state;
-    // console.log(std_id);
+    console.log('dbc');
     
     
 
 
     const [returnedData, setReturnedData] = React.useState(['dashboard']);
+    const [returnedData2, setReturnedData2] = React.useState(['dashboard2']);
 
     React.useEffect(() => {
         const fetchData = async () => {
@@ -50,108 +51,126 @@ const Dashboard = () => {
                 setReturnedData(newData);
     
             }
+        const fetchHistory = async () => {
+            const newData = await fetch('/dashboard2' , {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ id: std_id })
+                })
+                
+                .then(res => res.json())
+                console.log(newData);
+                setReturnedData2(newData);
+    
+            }
 
-
-        
         fetchData();
+        fetchHistory();
         dispatch({id: std_id, loggedin: true});
         
 
     }, []);
 
+    return( <div>
 
-    return( 
-        <div>
+
+<Container className='bg-dark mt-5 mb-5'>
+    <h1 className='text-center' >Hello, {returnedData.Student_name}</h1>
+
+        <Row className="d-flex align-items-center">
+        <Col sm={12} md={6} lg={6}>
+                <p className='mb-5'>
+                    <span className='course-details'>Your ID:</span>
+                    {returnedData.Student_id}
+                </p>
+                <p className='mb-5'>
+                    <span className='course-details'>Major:</span>
+                    {returnedData.major_name}
+                </p>
+
+                <p className='mb-5'>
+                    <span className='course-details'>Batch:</span>
+                    {returnedData.batch}
+                </p>
+                <p className='mb-5'>
+                    <span className='course-details'>Department:</span>
+                    {returnedData.depart_name}
+                </p>
+                <p className='mb-5'>
+                    <span className='course-details'>School:</span>
+                    {returnedData.School_Name}
+                </p>
+
+                <p className='mb-5'>
+                    <span className='course-details'>Your Email:</span>
+                    {returnedData.student_email}
+                </p>
+
+                <p className='mb-5'>
+                    <span className='course-details'>Contact Number:</span>
+                    {returnedData.phone_number}
+                </p>
+            </Col>
+
+ 
+        </Row>
         
+    </Container>
+
+
+        <h1> Your Resource History</h1>
+
+    {returnedData2.map(item => (
+        <div key={item.view_id}>
         <Container className='bg-dark mt-5 mb-5'>
-        <h1 className='text-center' >Hello, {returnedData.res.Student_name}</h1>  // iskp white krna hai color black arha hai
-
+        
             <Row className="d-flex align-items-center">
+                {/* <Col sm={12} md={6} lg={6}>
+                    <img src={`../${item.picture}`} alt="Resource" style={{"width":"500px", "height": "350px", "padding": "20px"}} />
+                </Col> */}
 
                 <Col sm={12} md={6} lg={6}>
                     <p className='mb-5'>
-                        <span className='course-details'>Your ID:</span>
-                        {returnedData.res.Student_id}
+                        <span className='course-details'>Resource Name:</span>
+                        {item.Resource_Name}
                     </p>
                     <p className='mb-5'>
-                        <span className='course-details'>Major:</span>
-                        {returnedData.res.major_name}
-                    </p>
-
-                    <p className='mb-5'>
-                        <span className='course-details'>Batch:</span>
-                        {returnedData.res.batch}
-                    </p>
-                    <p className='mb-5'>
-                        <span className='course-details'>Department:</span>
-                        {returnedData.res.depart_name}
-                    </p>
-                    <p className='mb-5'>
-                        <span className='course-details'>School:</span>
-                        {returnedData.res.School_Name}
+                        <span className='course-details'>For Course:</span>
+                        {item.course_name}
                     </p>
 
                     <p className='mb-5'>
-                        <span className='course-details'>Your Email:</span>
-                        {returnedData.res.student_email}
+                        <span className='course-details'>Type:</span>
+                        {item.Category_name}
                     </p>
-
                     <p className='mb-5'>
-                        <span className='course-details'>Contact Number:</span>
-                        {returnedData.res.phone_number}
+                        <span className='course-details'>Last Accessed:</span>
+                        {item.view_date}
                     </p>
                 </Col>
             </Row>
-            
         </Container>
-
-
-        {/* <Container className='bg-dark mt-5 mb-5'>
-        <h1 className='text-center' >Your Resource History</h1>  // iskp white krna hai color black arha hai
-
-            <Row className="d-flex align-items-center">
-
-                <Col sm={12} md={6} lg={6}>
-                    <p className='mb-5'>
-                        <span className='course-details'>Your ID:</span>
-                        {returnedData.Student_id}
-                    </p>
-                    <p className='mb-5'>
-                        <span className='course-details'>Major:</span>
-                        {returnedData.major_name}
-                    </p>
-
-                    <p className='mb-5'>
-                        <span className='course-details'>Batch:</span>
-                        {returnedData.batch}
-                    </p>
-                    <p className='mb-5'>
-                        <span className='course-details'>Department:</span>
-                        {returnedData.depart_name}
-                    </p>
-                    <p className='mb-5'>
-                        <span className='course-details'>School:</span>
-                        {returnedData.School_Name}
-                    </p>
-
-                    <p className='mb-5'>
-                        <span className='course-details'>Your Email:</span>
-                        {returnedData.student_email}
-                    </p>
-
-                    <p className='mb-5'>
-                        <span className='course-details'>Contact Number:</span>
-                        {returnedData.phone_number}
-                    </p>
-                </Col>
-            </Row>
-            
-        </Container> */}
         </div>
+    ))};
+
+
+
+    </div>
     )
+
+
 }
 
 export default Dashboard;
+
+
+    
+    
+
+
 
 
 

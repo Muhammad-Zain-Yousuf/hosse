@@ -226,7 +226,7 @@ const viewHistory = async(User) => {
         inner join Courses as c on c.course_id=cr.Course_id inner join Resource_category as rc on rc.Category_id=cr.Res_Category
         where student_id = ${User.id} and rv.view_id in (
         select top 1 view_id from Resource_view where resource_id=rv.resource_id order by 
-        view_id desc)`);
+        view_id desc) order by rv.view_id desc`);
         return resources.recordset;
     } catch (error) {
         console.log(error);
