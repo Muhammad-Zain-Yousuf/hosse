@@ -2,7 +2,7 @@ const config = {
     user :'hosseuser2',
     password: '1234',
     server: 'DESKTOP-NMEG0OH', // wo name jo connect krte we / se pehle aye
-    database: 'OSSE',
+    database: 'OSSE2',
     options: {
         trustServerCertificate: true,
         trustedConnection: false,

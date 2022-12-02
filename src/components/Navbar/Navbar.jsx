@@ -53,9 +53,9 @@ const Header = () => {
         <Nav className='ms-auto'>
           <a href="/" className='links'>Logout</a> 
         </Nav>
-        <Nav className='me-auto'>
-          <Link to="/dashboard" className='links'>Profile</Link> 
-        </Nav>
+        {/* <Nav className='me-auto'>
+          <Link to="../" className='links'>Profile</Link> 
+        </Nav> */}
       </>
       )}
 

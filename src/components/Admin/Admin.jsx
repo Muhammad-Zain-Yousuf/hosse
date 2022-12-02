@@ -30,7 +30,7 @@ export const Admin = () => {
     const [resource,setResource] = React.useState({ resname:'', link:'',  code: '', type:''})
     const [form,setForm] = React.useState({ Name:'', link:'',  category: '', office:'', desc: ''})
     const [event,setEvent] = React.useState({ Name:'', type:'', desc: ''})
-
+    
     const setInput1 = (e) => {
         const{name,value} = e.target;
         if (name=== 'StdID' || name=== 'Batch'){

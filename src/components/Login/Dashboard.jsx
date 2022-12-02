@@ -78,7 +78,7 @@ const Dashboard = () => {
 
 
 <Container className='bg-dark mt-5 mb-5'>
-    <h1 className='text-center' >Hello, {returnedData.Student_name}</h1>
+    <h1 className='text-center' style={{color: "white"}}>Hello, {returnedData.Student_name}</h1>
 
         <Row className="d-flex align-items-center">
         <Col sm={12} md={6} lg={6}>
