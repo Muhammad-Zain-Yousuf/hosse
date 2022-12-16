@@ -1,3 +1,12 @@
+# Habib University One Stop Solution Explorer
+
+## About
+This app was created as a project for the Course Database Systems (Fall 2022).
+
+## Motivation
+- The goal was to build a platfrom which could bring all the resources together to make it easier and less time consuming for students to access these resources. The resources include Course related online resources and references, Instructor Details, Course Details, Details of Past and Upcoming Events, Office Forms etc.
+- The app allows students to create an account, save thier information as well as access history.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
